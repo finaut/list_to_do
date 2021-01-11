@@ -1,0 +1,15 @@
+#exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      = form_for @list, url: {controller: :lists, action: :create} do |form|
+        .modal-header
+          h5#exampleModalLabel.modal-title
+            | Name for new task
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        .modal-body
+          = form.text_field :name, class: 'form-control', placeholder: 'Example: home, shopping list ...'
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+            | Close
+          = form.submit 'Create', class: 'btn btn-dark'
+
