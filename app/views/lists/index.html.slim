@@ -13,29 +13,74 @@ main
         = notice
     - @lists.reverse.each do |list|
       .row#list.bg-dark[style="color: white" ]
-        .col-9.list_name
+        .col-1.list_name
+          p
+            | Task: #{list.tasks.size}
+        .col-8.list_name
           = list.name
         .col-3.list_name
           .btn-group
-            = link_to 'X', list, method: :put, class: 'btn btn-sm btn-warning', id: 'edit'
-            = link_to 'X', list, method: :delete, class: 'btn btn-sm btn-danger'
+            button[type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal"] X
 
-        = form_for [list, @tasks] do |form|
+
+            / MODAL for update already create lists
+            #editModal.modal.fade[tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"]
+              .modal-dialog
+                .modal-content
+                  = form_for list, remote: true do |form|
+                    .modal-header
+                      h5#editModalLabel.modal-title[style='color: black']
+                        = "Edit: #{ list.name}"
+                      button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+                    .modal-body
+                      = form.text_field :name, value: list.name, class: 'form-control', placeholder: 'Example: home, shopping list ...'
+                    .modal-footer
+                      button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+                        | Close
+                      = form.submit 'Update', class: 'btn btn-dark'
+
+
+
+
+            = link_to 'X', list_path(list), method: :delete, class: 'btn btn-sm btn-danger'
+
+        = form_for [list, @tasks], remote: true do |form|
           .row[style="margin-bottom: 10px" ]
             .col-8
               = form.text_field :title, class: 'form-control', placeholder: 'Entry task'
             .col-2
               = form.submit 'Create', class: 'btn btn-light', style: 'margin-right: 5%'
-          - list.tasks.reverse.each do |task|
-            .row.task_hover[style=" border-top: white 2px solid" ]
-              .col-sm-1.text-start.task_name[style='border-right: white 2px double']
-                div.form-check.form-switch
-                  = check_box task.complete, class: 'form-check-input', id: 'flexSwitchCheckDefault'
-              .col-sm-9.task_name.text-start.text-break
-                = task.title
-              .col-sm-2.task_name.text-end[style="border-left: white 2px double" ]
-                .btn-group
-                  = button_tag 'Edit', class: 'btn btn-sm btn-warning'
-                  = button_tag 'Delete', class: 'btn btn-sm btn-danger'
-                / = link_to 'Delete', list_task_path([list, task]), method: :delete, class: 'btn btn-danger'
-= render 'other/modal'
+
+        - list.tasks.reverse.each do |task|
+          .row.task_hover[style=" border-top: white 2px solid" ]
+            .col-sm-1.text-start.task_name[style='border-right: white 2px double']
+              div.form-check.form-switch
+                = check_box task.complete, class: 'form-check-input', id: 'flexSwitchCheckDefault'
+            .col-sm-9.task_name.text-start.text-break
+              = task.title
+            .col-sm-2.task_name.text-end[style="border-left: white 2px double" ]
+              .btn-group
+                button[type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editTaskModal"] Edit
+
+                / MODAL for already create tasks
+                #editTaskModal.modal.fade[tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true"]
+                  .modal-dialog
+                    .modal-content
+                      = form_for [list, task], remote: true do |form|
+                        .modal-header
+                          h5#editTaskModalLabel.modal-title[style='color: black']
+                            = "Edit: #{ task.title}"
+                          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+                        .modal-body
+                          = form.text_field :title, value: task.title, class: 'form-control', placeholder: 'Example ...'
+                        .modal-footer
+                          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+                            | Close
+                          = form.submit 'Update', class: 'btn btn-dark'
+                = link_to 'Delete', list_task_path(list, task), method: :delete, remote: true, class: 'btn btn-danger'
+
+
+
+
+= render 'form'
+= render 'form_edit'

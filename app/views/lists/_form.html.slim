@@ -1,7 +1,7 @@
 #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
   .modal-dialog
     .modal-content
-      = form_for @list, url: {controller: :lists, action: :create} do |form|
+      = form_for @list, url: {controller: :lists, action: :create}, remote:  true do |form|
         .modal-header
           h5#exampleModalLabel.modal-title
             | Name for new task
