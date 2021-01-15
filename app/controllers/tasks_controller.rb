@@ -7,7 +7,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to root_path, notice: 'Task was successfully created.' }
+        format.html { redirect_to root_path, notice: "Task: '#{@task.title}' was successfully created." }
       else
         format.html { redirect_to root_path, notice: 'Task created error.' }
       end
@@ -17,20 +17,16 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to root_path, notice: 'Task was successfully updated.' }
-        format.js
+        format.html { redirect_to root_path, notice: "Task: '#{@task.title}' was successfully updated." }
       else
-        format.html { redirect_to root_path, notice: 'Task update error.' }
+        format.html { redirect_to root_path, notice: "Task update error." }
       end
     end
   end
 
   def destroy
     @task.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Task was successfully destroyed.' }
-      format.js
-    end
+    redirect_to root_path notice: "Task: '#{@task.title}' was successfully destroyed."
   end
 
   private
