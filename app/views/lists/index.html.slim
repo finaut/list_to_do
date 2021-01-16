@@ -1,3 +1,5 @@
+/ #TODO нужно добавить стиля для мобильных приложения
+/1. Сильно вылазят полосы при маленьком размере экрана
 main
   .py-5.text-center
     = image_tag '1.png', class: "d-block mx-auto mb-4"
@@ -11,6 +13,10 @@ main
     - if notice
       .alert.alert-dark
         = notice
+
+    = render 'other/errors_for_list'
+    = render 'other/errors_for_task'
+
     - @lists.reverse.each do |list|
       .row#list.bg-dark[style="color: white" ]
         .col-1.list_name
@@ -38,8 +44,6 @@ main
                       button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
                         | Close
                       = form.submit 'Update', class: 'btn btn-dark'
-
-
 
 
             = link_to 'X', list_path(list), method: :delete, class: 'btn btn-sm btn-danger'
@@ -80,7 +84,4 @@ main
                 = link_to 'Delete', list_task_path(list, task), method: :delete, remote: true, class: 'btn btn-danger'
 
 
-
-
 = render 'form'
-= render 'form_edit'

@@ -1,0 +1,6 @@
+- if flash[:task_errors]
+  - flash[:task_errors].each do |msg|
+    .alert.alert-danger
+      - msg.each do |key, value|
+        p
+          = "Task : " + value.first

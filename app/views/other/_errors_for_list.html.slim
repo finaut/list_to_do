@@ -1,0 +1,6 @@
+- if flash[:list_errors]
+  - flash[:list_errors].each do |msg|
+    .alert.alert-danger
+      - msg.each do  |key, value|
+        p
+          = "List : " + value.first
