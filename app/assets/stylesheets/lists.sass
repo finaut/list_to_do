@@ -1,3 +1,7 @@
+// Общие
+.create_task
+  margin-top: 1%
+  margin-bottom: 2%
 
 .button_create
   margin-bottom: 2%
@@ -8,14 +12,81 @@
 #list
   margin-bottom: 5%
   padding: 2%
-  border-radius: 10px
+  border-bottom-right-radius: 10px
+  border-bottom-left-radius: 10px
 
-.list_name
-  padding-bottom: 2%
-  padding-top: 1%
+#checkbox1zaal1
+  margin: auto
+  margin-top: 30%
 
 .task_name
   padding-bottom: 1%
   padding-top: 1%
 
-.task_hover
+.full-list
+  color: white
+// кнопки
+.trasher
+  background-image: url('trash-fill.svg')
+  background-repeat: no-repeat
+  padding-right: 25px
+  padding-top: 14px
+  padding-bottom: 14px
+  background-position: center
+  filter: invert(1)
+
+.pencil
+  background-image: url('pencil-fill.svg')
+  background-repeat: no-repeat
+  padding-right: 25px
+  padding-top: 14px
+  padding-bottom: 14px
+  background-position: center
+  color: white
+  filter: invert(1)
+
+
+// Работа с заданиями
+.task-name
+  border-left: 4px double white
+  border-right: 1px solid white
+
+.list_task
+  border-top: 1px solid white
+  border-bottom: 1px solid white
+  width: 100%
+  margin-top: -1px
+
+.task-action
+  visibility: hidden
+
+.list_task:hover
+  background: #323232
+  .task-action
+   visibility: visible
+
+.list_action
+  visibility: hidden
+.list_header:hover
+  .list_action
+    visibility: visible
+
+// мобильные устройства
+@media(max-width: 320px)
+ .list_name
+   margin-left: -15 0%
+ .task_name
+
+@media(max-width: 425px)
+  .button-list
+    margin-left: -10%
+  .list_name
+    margin-left: -120%
+  #checkbox1zaal1
+    margin-top: -90%
+  .task_name
+    padding-bottom: 1%
+    padding-top: 1%
+    border-left: none
+    border-right: none
+    margin-left: -5%
