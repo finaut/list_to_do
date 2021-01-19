@@ -18,13 +18,12 @@ main
     = render 'other/errors_for_task'
 
     - @lists.reverse.each do |list|
-      .row#list.bg-dark.full-list.container-fluid
+      .row#list.bg-dark.full-list
         .list_header
           .row
-            .col-2
-              p
-                | Task: #{list.tasks.size}
-            .col-8
+            .col-1
+              = image_tag '1.png', class: 'title-image'
+            .col-9.text-start
               h3
                 = list.name
             .col-2.button-list.list_action
@@ -52,17 +51,16 @@ main
 
         = form_for [list, @tasks], remote: true do |form|
           .row.create_task
-            .col-2
-
-            .col-8
+            .col-1
+            .col-9
               = form.text_field :title, class: 'form-control', placeholder: 'Entry task'
-            .col-2
+            .col-1
               = form.submit 'Create', class: 'btn btn-success', style: 'margin-right: 5%'
 
         - list.tasks.reverse.each do |task|
           .row.list_task
-            .col-1.task_left.text-start
-              input#checkbox1zaal1[type='checkbox']
+            .col-1.task_left
+              input#checkbox1zaal1.faChkRnd[type='checkbox']
             .col-9.text-start.text-break.task-name
               = task.title
             .col-2.task_name.task_right.text-end.task-action
