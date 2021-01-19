@@ -19,11 +19,8 @@ ActiveRecord::Schema.define(version: 2021_01_10_054702) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.boolean "complete", default: false
     t.string "title"
     t.integer "list_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
     t.index ["list_id"], name: "index_tasks_on_list_id"
   end
 

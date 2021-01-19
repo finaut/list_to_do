@@ -5,7 +5,6 @@ class ListsController < ApplicationController
     @lists = List.all
     @list = List.new
     @tasks = @list.tasks.build
-
   end
 
   def create
@@ -22,7 +21,6 @@ class ListsController < ApplicationController
       redirect_to root_path, notice: "List: '#{@list.name}' was successfully updated."
     else
       config_flash_message :list_errors, @list
-
     end
   end
 
