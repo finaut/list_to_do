@@ -1,0 +1,14 @@
+#editTaskModal.modal.fade[tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      = form_for [list, task], remote: true do |form|
+        .modal-header
+          h5#editTaskModalLabel.modal-title[style='color: black']
+            = "Edit: #{ task.title}"
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        .modal-body
+          = form.text_field :title, value: task.title, class: 'form-control', placeholder: 'Example ...'
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+            | Close
+          = form.submit 'Update', class: 'btn btn-success'

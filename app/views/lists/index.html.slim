@@ -1,5 +1,5 @@
-/ #TODO нужно добавить стиля для мобильных приложения
-/1. Сильно вылазят полосы при маленьком размере экрана
+= render 'form_create_list'
+
 main
   .py-5.text-center
     = image_tag '1.png', class: "d-block mx-auto mb-4"
@@ -13,7 +13,6 @@ main
     - if notice
       .alert.alert-dark
         = notice
-
     = render 'other/errors_for_list'
     = render 'other/errors_for_task'
 
@@ -30,33 +29,8 @@ main
               .btn-group
                 button[type="button" class="btn btn-outline-primary btn-sm pencil" data-bs-toggle="modal" data-bs-target="#editModal"]
                 = link_to '', list_path(list), method: :delete, class: 'btn btn-sm btn-outline-info trasher'
-
-
-            / MODAL for update already create lists
-          #editModal.modal.fade[tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"]
-            .modal-dialog
-              .modal-content
-                = form_for list, remote: true do |form|
-                  .modal-header
-                    h5#editModalLabel.modal-title[style='color: black']
-                      = "Edit: #{ list.name}"
-                    button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-                  .modal-body
-                    = form.text_field :name, value: list.name, class: 'form-control', placeholder: 'Example: home, shopping list ...'
-                  .modal-footer
-                    button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
-                      | Close
-                    = form.submit 'Update', class: 'btn btn-success'
-
-
-        = form_for [list, @tasks], remote: true do |form|
-          .row.create_task
-            .col-1
-            .col-9
-              = form.text_field :title, class: 'form-control', placeholder: 'Entry task'
-            .col-1
-              = form.submit 'Create', class: 'btn btn-success', style: 'margin-right: 5%'
-
+          = render 'lists/modal_edit_list', list: list
+        = render 'form_create_task', list: list, tasks: @tasks
         - list.tasks.reverse.each do |task|
           .row.list_task
             .col-1.task_left
@@ -67,21 +41,4 @@ main
               .btn-group
                 button[type="button" class="btn btn-outline-primary btn-sm pencil" data-bs-toggle="modal" data-bs-target="#editTaskModal" ]
                 = link_to '', list_task_path(list, task), method: :delete, remote: true, class: 'btn btn-sm btn-outline-info trasher'
-
-            / MODAL for already create tasks
-          #editTaskModal.modal.fade[tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true"]
-            .modal-dialog
-              .modal-content
-                = form_for [list, task], remote: true do |form|
-                  .modal-header
-                    h5#editTaskModalLabel.modal-title[style='color: black']
-                      = "Edit: #{ task.title}"
-                    button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-                  .modal-body
-                    = form.text_field :title, value: task.title, class: 'form-control', placeholder: 'Example ...'
-                  .modal-footer
-                    button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
-                      | Close
-                    = form.submit 'Update', class: 'btn btn-success'
-
-= render 'form'
+          = render 'lists/modal_edit_task', list: list, task: task

@@ -1,0 +1,7 @@
+= form_for [list, tasks], remote: true do |form|
+  .row.create_task
+    .col-1
+    .col-9
+      = form.text_field :title, class: 'form-control', placeholder: 'Entry task'
+    .col-1
+      = form.submit 'Create', class: 'btn btn-success', style: 'margin-right: 5%'

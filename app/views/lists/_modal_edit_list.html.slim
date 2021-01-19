@@ -1,0 +1,14 @@
+#editModal.modal.fade[tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"]
+  .modal-dialog
+    .modal-content
+      = form_for list, remote: true do |form|
+        .modal-header
+          h5#editModalLabel.modal-title[style='color: black']
+            = "Edit: #{ list.name}"
+          button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+        .modal-body
+          = form.text_field :name, value: list.name, class: 'form-control', placeholder: 'Example: home, shopping list ...'
+        .modal-footer
+          button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+            | Close
+          = form.submit 'Update', class: 'btn btn-success'
